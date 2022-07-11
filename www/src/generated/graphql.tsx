@@ -1238,6 +1238,12 @@ export type LoginMethodResponse = {
   token?: Maybe<Scalars['String']>;
 };
 
+export type LoginRequest = {
+  __typename?: 'LoginRequest';
+  requestedScope?: Maybe<Array<Maybe<Scalars['String']>>>;
+  subject?: Maybe<Scalars['String']>;
+};
+
 export enum MediaType {
   Audio = 'AUDIO',
   Image = 'IMAGE',
@@ -1456,6 +1462,13 @@ export type OidcSettingsAttributes = {
   subdomain?: InputMaybe<Scalars['Boolean']>;
   uriFormat?: InputMaybe<Scalars['String']>;
   uriFormats?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type OidcStepResponse = {
+  __typename?: 'OidcStepResponse';
+  consent?: Maybe<ConsentRequest>;
+  login?: Maybe<LoginRequest>;
+  repository?: Maybe<Repository>;
 };
 
 export enum OnboardingState {
@@ -2880,6 +2893,8 @@ export type RootQueryType = {
   oauthIntegrations?: Maybe<Array<Maybe<OauthIntegration>>>;
   oauthLogin?: Maybe<Repository>;
   oauthUrls?: Maybe<Array<Maybe<OauthInfo>>>;
+  oidcConsent?: Maybe<OidcStepResponse>;
+  oidcLogin?: Maybe<OidcStepResponse>;
   oidcLogins?: Maybe<OidcLoginConnection>;
   platformMetrics?: Maybe<PlatformMetrics>;
   publicKeys?: Maybe<PublicKeyConnection>;
@@ -3147,6 +3162,16 @@ export type RootQueryTypeOauthLoginArgs = {
 
 export type RootQueryTypeOauthUrlsArgs = {
   host?: InputMaybe<Scalars['String']>;
+};
+
+
+export type RootQueryTypeOidcConsentArgs = {
+  challenge: Scalars['String'];
+};
+
+
+export type RootQueryTypeOidcLoginArgs = {
+  challenge: Scalars['String'];
 };
 
 
